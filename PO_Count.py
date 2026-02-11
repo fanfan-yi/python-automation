@@ -8,8 +8,8 @@ from datetime import datetime
 # ===== Oracle 連線 =====
 cx_Oracle.init_oracle_client(lib_dir=r"D:\instantclient_21_7")#Oracle 驅動位置
 
-dsn = cx_Oracle.makedsn("192.168.100.43", 1541, service_name="C2504")#makedsn(host, port, service_name)封裝 Oracle 資料庫連線參數
-conn = cx_Oracle.connect(user="APPS", password="APPS", dsn=dsn)
+dsn = cx_Oracle.makedsn("192.168.100.43", 1541, service_name="XXX")#makedsn(host, port, service_name)封裝 Oracle 資料庫連線參數
+conn = cx_Oracle.connect(user="XXX", password="XXX", dsn=dsn)
 
 # ===== SQL =====
 sql_daily_po = """
@@ -92,3 +92,4 @@ for sheet in wb.worksheets:
 wb.save(file_name)
 
 print(f"PO Excel report generated: {file_name}")
+
