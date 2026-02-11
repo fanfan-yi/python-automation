@@ -9,8 +9,8 @@ cx_Oracle.init_oracle_client(lib_dir=r"D:\instantclient_21_7")#初始化 Oracle 
 def oracle():
     # ===== 連線資料 =====
     account = "APPS"#oracle使用者
-    pwd = "APPS"#密碼
-    dsn = "192.168.100.43:1541/C2504"#IP:PORT/SID
+    pwd = "XXXX"#密碼
+    dsn = "192.168.100.43:1541/XXXX"#IP:PORT/SID
 
     sqlPo = """
     SELECT
@@ -69,3 +69,4 @@ def oracle():
 
 if __name__ == "__main__":
     oracle()
+
