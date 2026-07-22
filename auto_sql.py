@@ -8,9 +8,9 @@ cx_Oracle.init_oracle_client(lib_dir=r"D:\instantclient_21_7")#初始化 Oracle 
 
 def oracle():
     # ===== 連線資料 =====
-    account = "APPS"#oracle使用者
-    pwd = "XXXX"#密碼
-    dsn = "192.168.100.43:1541/XXXX"#IP:PORT/SID
+    account = "ACCOUNT"#oracle使用者
+    pwd = "YOUR_PASSWORD"#密碼
+    dsn = "YOUR_HOST:PORT/SERVICE_NAME"#IP:PORT/SID
 
     sqlPo = """
     SELECT
