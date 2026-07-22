@@ -123,43 +123,6 @@ python-automation/
 
 The folder migration is planned only when the number of scripts makes the current flat structure difficult to maintain.
 
-## Getting Started
-
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/fanfan-yi/python-automation.git
-cd python-automation
-```
-
-### 2. Create a virtual environment
-
-```bash
-python -m venv .venv
-```
-
-Activate it on Windows:
-
-```powershell
-.venv\Scripts\activate
-```
-
-### 3. Install packages
-
-For reporting and Oracle database modules:
-
-```bash
-pip install pandas openpyxl cx_Oracle
-```
-
-For UI automation:
-
-```bash
-pip install selenium pyautogui pyperclip
-```
-
-Dependencies will later be consolidated into `requirements.txt`.
-
 ## Configuration
 
 Some scripts require local configuration before they can run:
