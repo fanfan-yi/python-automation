@@ -19,10 +19,10 @@ These tasks can be slow, inconsistent, and difficult to audit. This project expl
 
 | Module | Category | Business Purpose | Main Output | Status |
 | --- | --- | --- | --- | --- |
-| [`po_headers_report.py`](./po_headers_report.py) | Reporting | Summarises sample purchase orders by approval status and currency | Console summary and Excel workbook | Runnable sample |
-| [`PO_Count.py`](./PO_Count.py) | Reporting | Analyses Oracle EBS purchase-order volume and approval status for the previous 30 days | Excel workbook with trend and status charts | Environment setup required |
-| [`auto_sql.py`](./auto_sql.py) | Data quality | Detects `PO_DISTRIBUTIONS_ALL` records with missing requisition and delivery information | Date-stamped exception report | Environment setup required |
-| [`creat_office.py`](./creat_office.py) | UI automation | Creates account-rule records in Oracle EBS from spreadsheet input | Automated browser data entry | Proof of concept |
+| [`po_headers_report.py`](./po_headers_report.py) | Reporting | Demonstrates purchase-order processing and Excel export using anonymised sample data | Console summary and Excel workbook | Runnable sample |
+| [`PO_Count.py`](./PO_Count.py) | Reporting | Analyses Oracle EBS purchase-order volume and approval status for the previous 30 days | Excel workbook with trend and status charts | Oracle environment required |
+| [`auto_sql.py`](./auto_sql.py) | Data quality | Detects `PO_DISTRIBUTIONS_ALL` records with missing requisition and delivery information | Date-stamped exception report | Oracle environment required |
+| [`creat_office.py`](./creat_office.py) | UI automation | Creates account-rule records in Oracle EBS from spreadsheet input | Automated browser data entry | Environment-specific proof of concept |
 
 > When a new script is added, add one row to this table and create a matching section under **Module Details**.
 
