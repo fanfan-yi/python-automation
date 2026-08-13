@@ -1,0 +1,21 @@
+# Environment variables and secrets
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Generated reports
+output/*.xlsx
+logs/*.log
+
+# Keep output directory
+!output/.gitkeep
