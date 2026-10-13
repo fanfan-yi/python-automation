@@ -10,22 +10,11 @@ from selenium.webdriver.common.by import By    #尋找網頁元素
 from selenium.webdriver.common.keys import Keys    
 from selenium.webdriver.support.ui import Select
 
-
-RUN_DIR = "D:\\auto_creat"
-driver = webdriver.Chrome('C:\\chromedriver-win64\\chromedriver.exe')
-
-os.chdir(RUN_DIR)
-
-# ----------------
-VAT_ZFILL = 8
-#str(VAT).zfill(VAT_ZFILL)
-
-#
-#登入後的網頁
-targe_page ="http://XXX.XXXX.com.tw:8000/OA_HTML/AppsLocalLogin.jsp"
-
-#隨著不同session替換
-ooo_page ="http://XXX.XXXX.com.tw:8000/OA_HTML/RF.jsp?function_id=11720&resp_id=57507&resp_appl_id=201&security_group_id=0&lang_code=ZHT&params=WvOGb78CzrMe6VJJI8GmMVk3vApamiIF7E.eSdirwZQ&oas=WsGCLa90bHY-3JfhjPC3Qg.."
+from config import (
+    AUTOMATION_INPUT_FILE,
+    EBS_LOGIN_URL,
+    EBS_TARGET_URL,
+)
 
 def read_my_login():
     check_excel_data = pd.read_excel('C:/Users/yvonne/Desktop/login.xlsx') #開啟excel
@@ -37,9 +26,8 @@ def read_my_login():
 
 def read_my_xls():
 
-    df = pd.read_excel('N:/VLAP/20Dataload資料/建立費用科目規則/login1.xlsx')
-    
-    return df.to_dict('index'), len(df.index)
+    df = pd.read_excel(AUTOMATION_INPUT_FILE)
+    return df.to_dict("index"), len(df.index)
 
 def login_web():
     time.sleep(2)
@@ -101,11 +89,14 @@ def login_step(row):
     time.sleep(2)
 
 if __name__ == '__main__':
+    driver = webdriver.Chrome()
     start_t =time.time()
+    
     print("連網站")
-    driver.get(targe_page)  # 連網站
+    driver.get(EBS_LOGIN_URL)  # 連網站
     print("#################登入完成#################")
-    driver.get(ooo_page)
+    
+    driver.get(EBS_TARGET_URL)
     login_web()
     excel, len_of_excel = read_my_xls()
     for idx in range(len_of_excel):
