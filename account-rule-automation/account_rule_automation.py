@@ -1,4 +1,3 @@
-import os    #切換工作目錄
 import time    #等待與計算執行時間
 
 import pandas as pd    #讀 Excel
@@ -20,8 +19,46 @@ from config import (
 WAIT_TIMEOUT = 15
 
 def read_my_xls():
+    """Read and validate the account rule input file."""
 
     df = pd.read_excel(AUTOMATION_INPUT_FILE)
+
+    required_columns = {
+        "name1",
+        "select",
+        "unitt",
+    }
+
+    missing_columns = required_columns - set(df.columns)
+    
+    if missing_columns:    #空值驗證
+        raise ValueError(
+            "Missing required columns: "
+            + ", ".join(sorted(missing_columns))
+        )
+        
+    required_value_columns = ["name1", "select"]
+    
+    empty_required_rows = df[
+        df[required_value_columns].isna().any(axis=1)
+    ]
+
+    if not empty_required_rows.empty:
+        row_numbers = (empty_required_rows.index + 2).tolist()
+        raise ValueError(
+            f"Missing required values in Excel rows: {row_numbers}"
+        )
+
+    missing_segment_value_rows = df[
+        (df["select"] != "會計子目")
+        & df["unitt"].isna()
+    ]
+
+    if not missing_segment_value_rows.empty:
+        row_numbers = (missing_segment_value_rows.index + 2).tolist()
+        raise ValueError(
+            f"Missing segment value in Excel rows: {row_numbers}"
+        )
     return df.to_dict("index"), len(df.index)
 
 def create_account_rule(row):
