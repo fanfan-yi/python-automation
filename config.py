@@ -1,4 +1,4 @@
-"""Application configuration for Oracle ERP Data Quality Monitor."""
+"""Shared configuration for Oracle EBS Python automation tools."""
 import logging
 import os
 
@@ -49,3 +49,12 @@ LOG_FORMAT = (
 LOG_ROTATION_WHEN = "midnight"
 LOG_ROTATION_INTERVAL = 1
 LOG_BACKUP_COUNT = 14
+
+# Oracle EBS UI automation configuration
+EBS_LOGIN_URL = get_required_env("EBS_LOGIN_URL")
+EBS_TARGET_URL = get_required_env("EBS_TARGET_URL")
+
+AUTOMATION_INPUT_FILE = os.getenv(
+    "AUTOMATION_INPUT_FILE",
+    "./input/account_rules.xlsx",
+)
