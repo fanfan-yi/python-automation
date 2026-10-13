@@ -1,28 +1,13 @@
-from ast import If
-from audioop import add
-from cgi import print_directory
-from lib2to3.pgen2.token import COMMA
-from pickle import FALSE
-from tkinter import OFF
-from traceback import print_tb
-import pyautogui
-import email
-import imp
-from logging import getLogRecordFactory
-import sys
-from turtle import goto
-from numpy import double, number
-import selenium
-from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
-import time
-import pandas as pd
-import os
-import pyperclip
-from selenium.webdriver.common.keys import Keys
-import openpyxl
+import os    #切換工作目錄
+import time    #等待與計算執行時間
+
+import pandas as pd    #讀 Excel
+import pyautogui    #目前登入操作
+import pyperclip    #處理「會計子目」
+
+from selenium import webdriver    #Chrome automation
+from selenium.webdriver.common.by import By    #尋找網頁元素
+from selenium.webdriver.common.keys import Keys    
 from selenium.webdriver.support.ui import Select
 
 
