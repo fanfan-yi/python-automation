@@ -138,24 +138,67 @@ def create_account_rule(row):
     )
     apply_button.click()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     driver = webdriver.Chrome()
-    start_t =time.time()
-    
-    print("連網站")
-    driver.get(EBS_LOGIN_URL)  # 連網站
-    input("Log in to Oracle EBS, then press Enter to continue...")
-    
-    driver.get(EBS_TARGET_URL)
+    start_t = time.time()
 
-    excel, len_of_excel = read_my_xls()
-    for idx in range(len_of_excel):
-        print("第", idx+1, "筆")
-        current_row = excel[idx]
-        create_account_rule(current_row)
-    print("完成")
-    end_t = time.time()
-    print("執行時間:%f 秒" % (end_t - start_t))
+    try:
+        print("Connecting to Oracle EBS...")
 
-    print("================= 第", idx+1, "筆: 結束 ====================")
-    print("=============== all end! =================")
+        driver.get(EBS_LOGIN_URL)
+        input(
+            "Log in to Oracle EBS, then press Enter to continue..."
+        )
+
+        driver.get(EBS_TARGET_URL)
+
+        excel, len_of_excel = read_my_xls()
+
+        failed_rows = []
+        successful_rows = 0
+
+        for idx in range(len_of_excel):
+            print(f"Processing row {idx + 1}...")
+
+            current_row = excel[idx]
+
+            try:
+                create_account_rule(current_row)
+                successful_rows += 1
+
+            except Exception as error:
+                failed_rows.append(
+                    {
+                        "row": idx + 1,
+                        "error": str(error),
+                    }
+                )
+
+                print(
+                    f"Row {idx + 1} failed: {error}"
+                )
+
+                driver.switch_to.default_content()
+
+        end_t = time.time()
+
+        print("\n===== Execution Summary =====")
+        print(f"Total rows: {len_of_excel}")
+        print(f"Successful: {successful_rows}")
+        print(f"Failed: {len(failed_rows)}")
+        print(
+            f"Execution time: "
+            f"{end_t - start_t:.2f} seconds"
+        )
+
+        if failed_rows:
+            print("\nFailed rows:")
+
+            for failure in failed_rows:
+                print(
+                    f"- Row {failure['row']}: "
+                    f"{failure['error']}"
+                )
+
+    finally:
+        driver.quit()
