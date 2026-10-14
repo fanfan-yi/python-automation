@@ -1,0 +1,9 @@
+| name1 | select | unitt |
+|---|---|---|
+| SAMPLE_CATEGORY_001 | 公司別 | 01 |
+| SAMPLE_CATEGORY_001 | 部門 | D100 |
+| SAMPLE_CATEGORY_001 | 會計科目 | 510100 |
+| SAMPLE_CATEGORY_002 | 公司別 | 02 |
+| SAMPLE_CATEGORY_002 | 部門 | D200 |
+| SAMPLE_CATEGORY_002 | 會計科目 | 520100 |
+| SAMPLE_CATEGORY_003 | 會計子目 | |
