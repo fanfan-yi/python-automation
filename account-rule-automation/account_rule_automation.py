@@ -61,7 +61,7 @@ def read_my_xls():
         )
     return df.to_dict("index"), len(df.index)
 
-def create_account_rule(row):
+def create_account_rule(driver, row):
     wait = WebDriverWait(driver, WAIT_TIMEOUT)
 
     create_button = wait.until(
@@ -138,6 +138,20 @@ def create_account_rule(row):
     )
     apply_button.click()
 
+def recover_to_account_rule_page(driver):
+    """Return to the account rule page after a failed record."""
+
+    driver.switch_to.default_content()
+    driver.get(EBS_TARGET_URL)
+
+    wait = WebDriverWait(driver, WAIT_TIMEOUT)
+
+    wait.until(
+        EC.element_to_be_clickable(
+            (By.ID, "CreateButton")
+        )
+    )
+
 if __name__ == "__main__":
     driver = webdriver.Chrome()
     start_t = time.time()
@@ -163,7 +177,7 @@ if __name__ == "__main__":
             current_row = excel[idx]
 
             try:
-                create_account_rule(current_row)
+                create_account_rule(driver, current_row)
                 successful_rows += 1
 
             except Exception as error:
@@ -178,7 +192,15 @@ if __name__ == "__main__":
                     f"Row {idx + 1} failed: {error}"
                 )
 
-                driver.switch_to.default_content()
+                try:
+                    recover_to_account_rule_page(driver)
+                
+                except Exception as recovery_error:
+                    print(
+                        "Unable to recover the Oracle EBS page: "
+                        f"{recovery_error}"
+                    )
+                    raise
 
         end_t = time.time()
 
