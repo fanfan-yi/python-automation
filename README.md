@@ -22,7 +22,7 @@ These tasks can be slow, inconsistent, and difficult to audit. This project expl
 | [`po_headers_report.py`](./po_headers_report.py) | Reporting | Demonstrates purchase-order processing and Excel export using anonymised sample data | Console summary and Excel workbook | Runnable sample |
 | [`PO_Count.py`](./PO_Count.py) | Reporting | Analyses Oracle EBS purchase-order volume and approval status for the previous 30 days | Excel workbook with trend and status charts | Oracle environment required |
 | [`auto_sql.py`](./auto_sql.py) | Data quality / Application Support | Detects incomplete Oracle EBS purchasing distributions and provides structured execution evidence for troubleshooting | Date-stamped Excel exception report and application log | Oracle environment required |
-| [`creat_office.py`](./creat_office.py) | UI automation | Creates account-rule records in Oracle EBS from spreadsheet input | Automated browser data entry | Environment-specific proof of concept |
+| [`account-rule-automation`](./account-rule-automation/) | UI automation / ERP configuration | Automates repetitive Oracle EBS Expense Account Rule configuration from validated Excel input | Oracle EBS browser automation with per-record error handling | Sanitised portfolio module |
 
 > When a new script is added, add one row to this table and create a matching section under **Module Details**.
 
@@ -168,13 +168,27 @@ This supports an Application Support troubleshooting workflow based on execution
 
 This module applies production-oriented engineering practices for maintainability and supportability, but it is a portfolio implementation and is **not presented as a deployed production application**.
 
-### 4. Oracle EBS Account-Rule Automation
+### 4. Oracle EBS Account Rule Automation
 
-**File:** `creat_office.py`
+**Module:** [`account-rule-automation/`](./account-rule-automation/)
 
-Reads login and setup data from Excel, then uses Selenium and PyAutoGUI to automate repeated Oracle EBS account-rule entry.
+Automates repetitive Oracle EBS Expense Account Rule configuration using validated Excel input and Selenium WebDriver.
 
-This module is a proof of concept and currently depends on environment-specific URLs, browser configuration, file paths, and page elements.
+The module was derived from an automation solution developed during an Oracle EBS Procurement rollout involving 148 purchasing categories and 1,036 required segment-level setup operations.
+
+The portfolio implementation includes:
+
+- Excel input validation
+- environment-based Oracle EBS configuration
+- Selenium explicit waits
+- LOV/iframe handling
+- per-record exception handling
+- recovery to a known EBS page after record failure
+- execution summary and WebDriver cleanup
+
+The implementation is sanitised so production credentials, internal URLs, company-specific configuration, and production data are not included.
+
+See the module README for the business problem, workflow, configuration, and confidentiality design.
 
 ## Technology Stack
 
@@ -201,7 +215,13 @@ python-automation/
 ├── .gitignore
 ├── po_headers_report.py
 ├── PO_Count.py
-├── creat_office.py
+├── account-rule-automation/
+│   ├── README.md
+│   ├── account_rule_automation.py
+│   ├── config.py
+│   ├── .env.example
+│   └── input/
+│       └── account_rules_sample.xlsx
 ├── output/                 # Generated reports
 └── logs/                   # Runtime logs; log files excluded from Git
 ```
@@ -303,7 +323,7 @@ Future repository improvements:
 
 - [ ] Add automated tests with sample or mocked Oracle data
 - [ ] Add anonymised screenshots or sample report evidence
-- [ ] Replace fixed UI waits with explicit Selenium conditions
+- [x] Replace fixed UI waits with explicit Selenium conditions
 - [ ] Group scripts into category folders when required
 
 ## Scope and Limitations
