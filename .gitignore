@@ -19,3 +19,6 @@ logs/*.log
 
 # Keep output directory
 !output/.gitkeep
+
+# Oracle EBS account rule automation
+account-rule-automation/input/account_rules.xlsx
